@@ -272,6 +272,8 @@ TASK(byte) LunaticRun(int *lastTime)
 					lastKey = 0;
 					CO_RETURN WORLD_QUITGAME; // dump out altogether
 					break;
+				default:
+					break;
 			}
 		}
 		else if (gameMode == GAMEMODE_PIC) // gamemode_pic
@@ -417,6 +419,9 @@ void LunaticDraw(void)
 
 byte WorldPauseRun(int *lastTime)
 {
+	if (!lastTime)
+		return LEVEL_PLAYING;
+		
 	numRunsToMakeUp = 0;
 	while (*lastTime >= TIME_PER_FRAME)
 	{
@@ -445,6 +450,8 @@ byte WorldPauseRun(int *lastTime)
 				mapToGoTo = 255;
 				lastKey = 0;
 				return WORLD_QUITGAME; // dump out altogether
+				break;
+			default:
 				break;
 		}
 		*lastTime -= TIME_PER_FRAME;
